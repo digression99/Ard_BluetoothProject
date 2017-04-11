@@ -1,0 +1,81 @@
+Xbee relay code--arduino and xbee wireless setup
+
+
+int myData = 0;
+int const ledpin = 13;
+
+void setup(){
+	// Start up our serial port, we configured our XBEE devices for 9600 bps.
+	Serial.begin(9600);
+	pinMode(ledpin, OUTPUT);
+}
+
+void loop(){
+   
+	if(Serial.available() > 0){
+ 	 
+    	myData = Serial.read();
+   	 
+    	if(myData == '1'){
+    	digitalWrite(ledpin, HIGH);
+    	Serial.print(myData,BYTE);
+    	}
+   	 
+    	if(myData == '2'){
+    	digitalWrite(ledpin, LOW);
+    	Serial.print(myData, BYTE);
+	}
+	else{
+	Serial.print(myData, BYTE);
+	}
+   
+}
+}
+
+
+
+
+
+Code for the AC outlet Project
+
+// this is where we will put our data
+int myData = 0;
+int const ledpin1 = 9;
+int const ledpin2 = 11;
+void setup(){
+	// Start up our serial port, we configured our XBEE devices for 9600 bps.
+	Serial.begin(9600);
+	pinMode(ledpin1, OUTPUT);
+	pinMode(ledpin2, OUTPUT);
+}
+
+void loop(){
+	// handle serial data, if any
+	if(Serial.available() > 0){
+ 	 
+    	myData = Serial.read();
+   	 
+    	if(myData == '1'){
+    	digitalWrite(ledpin2, LOW);
+    	delay(100);
+    	digitalWrite(ledpin1, HIGH);
+    	delay(100);
+    	Serial.print(myData,BYTE);
+    	delay(100);
+    	}
+   	 
+    	if(myData == '2'){
+    	digitalWrite(ledpin1, LOW);
+    	delay(100);
+    	digitalWrite(ledpin2, HIGH);
+    	delay(100);
+    	Serial.print(myData, BYTE);
+    	delay(100);
+	}
+	else{
+	Serial.print(myData, BYTE);
+	}
+   
+}
+}
+
